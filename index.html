@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svatba na míru | Váš den bez starostí</title>
+    <style>
+        /* --- ZÁKLADNÍ NASTAVENÍ A PROMĚNNÉ --- */
+        :root {
+            /* Barvy laděné do elegantní zlatavé a krémové */
+            --primary: #d4a373; 
+            --secondary: #faedcd; 
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #fefae0;
+            --font-heading: 'Playfair Display', serif; /* Elegantní patkový font pro nadpisy */
+            --font-body: 'Open Sans', sans-serif; /* Čitelný bezpatkový font pro text */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Plynulé scrollování */
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #fff;
+        }
+
+        /* Import Google fontů */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVIGACE --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(212, 163, 115, 0.3);
+        }
+
+        .cta-btn:hover {
+            background-color: #b08968;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SEKCE --- */
+        .hero {
+            height: 100vh;
+            /* Pozadí s jemným ztmavením, aby byl text čitelný */
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax efekt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        /* --- O NÁS --- */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .text-center h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 5px;
+            /* Ozdobný rámeček */
+            border: 15px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- SLUŽBY --- */
+        .services-bg {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+
+        /* Dekorativní prvek na pozadí */
+        .services-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="%23d4a373" fill-rule="evenodd"><path d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20zm0-2c9.941 0 18-8.059 18-18S29.941 2 20 2 2 10.059 2 20s8.059 18 18 18z" opacity=".05"/></g></svg>');
+            pointer-events: none;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 15px 30px rgba(212, 163, 115, 0.2);
+        }
+
+        .icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- CENÍK --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .price-card {
+            border: 2px solid var(--secondary);
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .price-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.1);
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .price-tag {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.5rem 0;
+            font-family: var(--font-heading);
+        }
+
+        .price-card ul {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .price-card li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .price-card li::before {
+            content: "✦";
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* --- KONTAKT --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5rem;
+            position: relative; z-index: 1;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 350px;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .contact-icon-box {
+            width: 50px; height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+            background: #f9f9f9;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        
+        form input:focus, form textarea:focus, form select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+        }
+
+        form button {
+            width: 100%;
+            padding: 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
+        }
+
+        form button:hover {
+            background-color: #b08968;
+            transform: translateY(-3px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: auto;
+        }
+        
+        footer p strong { color: #fff; }
+
+        /* --- RESPONZIVITA --- */
+        @media (max-width: 900px) {
+             .hero-content h1 { font-size: 3rem; }
+            .nav-links { display: none; } /* Na mobilu schováme menu */
+            nav { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+            .logo { margin-bottom: 1rem; width: 100%; text-align: center; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-img { order: -1; } /* Obrázek dáme nad text na mobilu */
+            .price-card.featured { transform: scale(1); }
+            .contact-container { gap: 3rem; }
+            .contact-form { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Svatba na míru</div>
+            <div class="nav-links">
+                <a href="#o-nas">O nás</a>
+                <a href="#sluzby">Služby</a>
+                <a href="#cenik">Ceník</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+            <a href="#kontakt" class="cta-btn">Nezávazná poptávka</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vaše pohádková svatba začíná zde</h1>
+            <p>Plánujeme, designujeme a koordinujeme svatby, na které se nezapomíná. Odpočiňte si, my zařídíme vše potřebné pro vaše dokonalé "Ano".</p>
+            <a href="#sluzby" class="cta-btn">Objevte naše služby</a>
+        </div>
+    </section>
+
+    <section id="o-nas" class="section">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Architekti vašich nejhezčích vzpomínek</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Svatba je jedním z nejdůležitějších dnů ve vašem životě. V "Svatba na míru" věříme, že tento den má být plný radosti, emocí a lásky, nikoliv stresu z organizace a řešení problémů.</p>
+                <p>Už několik let plníme sny snoubencům po celé republice. Ať už toužíte po romantické svatbě na statku, moderní městské veselce nebo intimním obřadu v přírodě, jsme tu pro vás od prvotního nápadu až po poslední tanec.</p>
+                <div style="margin-top: 2rem; font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary);">
+                    "Naším cílem je, abyste byli hosty na vlastní svatbě."
+                </div>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?q=80&w=800&auto=format&fit=crop" alt="Svatební výzdoba na stole">
+            </div>
+        </div>
+    </section>
+
+    <section id="sluzby" class="services-bg">
+        <div class="section">
+            <div class="text-center">
+                <h2>Co pro vás zajistíme</h2>
+                <p>Naše služby jsou flexibilní. Vyberte si balíček, nebo si nechte sestavit služby na míru.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">✨</div>
+                    <h3>Kompletní organizace</h3>
+                    <p>Svatba na klíč od A do Z. Výběr místa, dodavatelů, designu, administrativy i harmonogramu. Vy jen přijdete a užijete si den.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📋</div>
+                    <h3>Koordinace dne D</h3>
+                    <p>Máte naplánováno, ale nechcete ve svatební den řešit provozní věci? Převezmeme otěže a zajistíme hladký průběh.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🌸</div>
+                    <h3>Design a koncept</h3>
+                    <p>Vytvoříme vizuální styl svatby, zajistíme floristiku, tiskoviny a dekorace, které dokonale podtrhnou vaši osobnost.</p>
+                </div>
+                 <div class="service-card">
+                    <div class="icon">🍽️</div>
+                    <h3>Catering a místo</h3>
+                    <p>Pomůžeme vám najít tu pravou lokalitu a sestavit menu, které nadchne všechny vaše hosty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cenik" class="section">
+        <div class="text-center">
+            <h2>Investice do klidu</h2>
+            <p>Uvedené ceny jsou orientační "od". Každá svatba je unikát a finální rozpočet ladíme vždy individuálně na míru.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Koordinace dne</h3>
+                <div class="price-tag">od 9 000 Kč</div>
+                <p>Pro páry, které si chtějí svůj den užít bez starostí.</p>
+                <ul>
+                    <li>1-2 osobní schůzky před svatbou</li>
+                    <li>Vytvoření detailního harmonogramu</li>
+                    <li>Přítomnost koordinátora (až 10 hodin)</li>
+                    <li>Řízení dodavatelů na místě</li>
+                    <li>Řešení nenadálých situací</li>
+                </ul>
+                <a href="#kontakt" class="cta-btn">Poptat balíček</a>
+            </div>
+
+            <div class="price-card featured">
+                <div style="background:var(--primary); color:white; position:absolute; top:0; left:50%; transform: translate(-50%, -50%); padding: 8px 20px; border-radius: 20px; font-weight:600; font-size:0.9rem; white-space: nowrap; box-shadow: 0 5px 10px rgba(0,0,0,0.1);">NEJOBLÍBENĚJŠÍ VOLBA</div>
+                <h3>Zlatá střední cesta</h3>
+                <div class="price-tag">od 29 000 Kč</div>
+                <p>Částečné plánování a profesionální vedení.</p>
+                <ul>
+                    <li>Vše z balíčku "Koordinace dne"</li>
+                    <li>Doporučení ověřených dodavatelů</li>
+                    <li>Pomoc s výběrem lokality</li>
+                    <li>Konzultace designu a stylu</li>
+                    <li>Průběžná on-line podpora</li>
+                </ul>
+                <a href="#kontakt" class="cta-btn">Poptat balíček</a>
+            </div>
+
+            <div class="price-card">
+                <h3>Svatba na klíč (VIP)</h3>
+                <div class="price-tag">od 65 000 Kč</div>
+                <p>Exkluzivní péče bez jakýchkoliv kompromisů.</p>
+                <ul>
+                    <li>Kompletní zajištění celé svatby</li>
+                    <li>Neomezený počet konzultací</li>
+                    <li>Detailní správa rozpočtu</li>
+                    <li>Kompletní administrativa a smlouvy</li>
+                    <li>Osobní asistent po celou dobu příprav</li>
+                </ul>
+                <a href="#kontakt" class="cta-btn">Poptat balíček</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="services-bg">
+        <div class="section">
+            <div class="text-center">
+                <h2>Pojďme si o tom promluvit</h2>
+                <p>Napište nám svou představu a my se vám ozveme s návrhem termínu nezávazné schůzky u kávy.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 style="margin-bottom: 2rem;">Kontaktní údaje</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon-box">📍</div>
+                        <div>
+                            <strong>Kde nás najdete:</strong>
+                            <p>Vinohradská 123, Praha 2<br>(Schůzky prosíme po domluvě)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon-box">📞</div>
+                        <div>
+                            <strong>Zavolejte nám:</strong>
+                             <p><a href="tel:+420777123456">+420 777 123 456</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                         <div class="contact-icon-box">✉️</div>
+                        <div>
+                            <strong>Napište nám:</strong>
+                             <p><a href="mailto:svatbanamiru@seznam.cz">svatbanamiru@seznam.cz</a></p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 3rem;">
+                        <p>Sledujte naši práci:</p>
+                        <p style="color: var(--primary); font-weight: bold; font-size: 1.1rem; margin-top: 0.5rem;">Instagram / Facebook</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 1.5rem;">Nezávazná poptávka</h3>
+                    <form id="weddingForm">
+                        <input type="text" placeholder="Vaše jméno a příjmení" required>
+                        <input type="email" placeholder="Váš e-mail" required>
+                        <div style="display: flex; gap: 1rem;">
+                             <input type="tel" placeholder="Telefon" style="margin-bottom: 0;">
+                             <input type="text" placeholder="Datum svatby (cca)" onfocus="(this.type='date')" style="margin-bottom: 0;">
+                        </div>
+                        <select style="margin-top: 1.5rem;">
+                            <option value="" disabled selected>O jaký balíček máte předběžně zájem?</option>
+                            <option value="koordinace">Koordinace dne</option>
+                            <option value="stredni">Zlatá střední cesta</option>
+                            <option value="naklic">Svatba na klíč (VIP)</option>
+                            <option value="nevim">Zatím nevím, chci poradit</option>
+                        </select>
+                        <textarea rows="5" placeholder="Napište nám něco o vaší představě (počet hostů, místo, styl)..."></textarea>
+                        <button type="submit">Odeslat poptávku</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 <strong>Svatba na míru</strong>. Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+        // Skript pro simulaci odeslání formuláře
+        document.getElementById("weddingForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Děkujeme! Vaše poptávka byla úspěšně odeslána na email svatbanamiru@seznam.cz. Brzy se vám ozveme.");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
